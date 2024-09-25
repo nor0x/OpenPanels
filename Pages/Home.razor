@@ -5,17 +5,19 @@
 
 <PageTitle>Home</PageTitle>
 
+<div class="img-container">
+	@if (_urls is not null)
+	{
 
-@if (_urls is not null)
-{
-
-	<Virtualize Items="_urls" Context="url">
-		<a href="@url" download="@(url.Split('/').Last())">
-			<img src="@url" style="width: 100px; height: 100px; object-fit: cover;" />
-		</a>
-	</Virtualize>
-}
-
+		<Virtualize Items="_urls" Context="url">
+			<ItemContent>
+				<a href="@url" download>
+					<img style="background-image: url('@url'), url('img/3-dots-rotate.svg');" />
+				</a>
+			</ItemContent>
+		</Virtualize>
+	}
+</div>
 @code
 {
 	List<string> _urls;
