@@ -1,0 +1,63 @@
+﻿@page "/"
+@using System.Text.Json;
+@inject IJSRuntime _js;
+@inject HttpClient _http
+
+<PageTitle>Home</PageTitle>
+
+
+@if (_urls is not null)
+{
+
+	<Virtualize Items="_urls" Context="url">
+		<a href="@url" download="@(url.Split('/').Last())">
+			<img src="@url" style="width: 100px; height: 100px; object-fit: cover;" />
+		</a>
+	</Virtualize>
+}
+
+@code
+{
+	List<string> _urls;
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			var json = await _http.GetStringAsync("data/all.json");
+			var doc = JsonDocument.Parse(json);
+			_urls = new List<string>();
+			ExtractUrls(doc.RootElement, _urls);
+
+			_urls = _urls.OrderBy(x => Random.Shared.Next()).ToList();
+
+			StateHasChanged();
+		}
+
+	}
+
+	void ExtractUrls(JsonElement element, List<string> urls)
+	{
+		if (element.ValueKind == JsonValueKind.Object)
+		{
+			foreach (var property in element.EnumerateObject())
+			{
+				if (property.Name == "url")
+				{
+					urls.Add(property.Value.GetString());
+				}
+				else
+				{
+					ExtractUrls(property.Value, urls);
+				}
+			}
+		}
+		else if (element.ValueKind == JsonValueKind.Array)
+		{
+			foreach (var item in element.EnumerateArray())
+			{
+				ExtractUrls(item, urls);
+			}
+		}
+	}
+}
