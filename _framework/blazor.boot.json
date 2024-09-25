@@ -1,10 +1,10 @@
 {
   "mainAssemblyName": "openpanels",
   "resources": {
-    "hash": "sha256-zWG7IIev5MY5y0joOh98VWzupvW4+qe8H8JXlcG5WkM=",
+    "hash": "sha256-ITpQGVUhwNkicYWraLLQUKjZjWxRYnzw24guOQbqy1k=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Components.0sj7o6etcy.wasm": "Microsoft.AspNetCore.Components.wasm",
-      "Microsoft.AspNetCore.Components.Web.iex4tnz0dp.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
+      "Microsoft.AspNetCore.Components.Web.q11yc94x13.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
       "Microsoft.AspNetCore.Components.WebAssembly.2bmqob1un0.wasm": "Microsoft.AspNetCore.Components.WebAssembly.wasm",
       "Microsoft.Extensions.Configuration.Abstractions.0pcp88fj2v.wasm": "Microsoft.Extensions.Configuration.Abstractions.wasm",
       "Microsoft.Extensions.Configuration.Json.izjurumqg8.wasm": "Microsoft.Extensions.Configuration.Json.wasm",
@@ -17,7 +17,7 @@
       "Microsoft.Extensions.Primitives.on5h9y1kqb.wasm": "Microsoft.Extensions.Primitives.wasm",
       "Microsoft.JSInterop.pl2pxw5t8w.wasm": "Microsoft.JSInterop.wasm",
       "Microsoft.JSInterop.WebAssembly.lqrqdcga09.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
-      "openpanels.1130o0vro1.wasm": "openpanels.wasm",
+      "openpanels.sfife6zia3.wasm": "openpanels.wasm",
       "System.Collections.Concurrent.hc4x6415gq.wasm": "System.Collections.Concurrent.wasm",
       "System.Collections.Immutable.s9o14o4i44.wasm": "System.Collections.Immutable.wasm",
       "System.Collections.1m5rth0mze.wasm": "System.Collections.wasm",
@@ -64,7 +64,7 @@
     },
     "assembly": {
       "Microsoft.AspNetCore.Components.0sj7o6etcy.wasm": "sha256-IJCPaZL5wAfDEP0oSHPUDxb00LoXn2rcwMzpn4F4y40=",
-      "Microsoft.AspNetCore.Components.Web.iex4tnz0dp.wasm": "sha256-5lQg0F9zPcjUw0vueyCsISl8Y2pIKonTqq4kIl0tfS8=",
+      "Microsoft.AspNetCore.Components.Web.q11yc94x13.wasm": "sha256-zgmr8eMZInUEjNyz+DZ7LAsd8LrgIx+3r6qerYcQBRY=",
       "Microsoft.AspNetCore.Components.WebAssembly.2bmqob1un0.wasm": "sha256-bqeQIFGAmlUK3Pb1zx3bvcsGnzJTUgGUPG6sYt6CGVU=",
       "Microsoft.Extensions.Configuration.Abstractions.0pcp88fj2v.wasm": "sha256-hOSS916jJDQnyO8IFJbRNGpNu7OCCV18KmTFkYhgfJg=",
       "Microsoft.Extensions.Configuration.Json.izjurumqg8.wasm": "sha256-rtO2dOGAlJA9pqsVxw6Q7KjbT98+5Ar72suklkXlhwc=",
@@ -77,7 +77,7 @@
       "Microsoft.Extensions.Primitives.on5h9y1kqb.wasm": "sha256-HEgB+i+fZZbJ3GID0ze2Jvkb2YpFU1oXEPVsFdKhKE8=",
       "Microsoft.JSInterop.pl2pxw5t8w.wasm": "sha256-k1XrKsWYmJitB6/UawWcuvU5Gi9IGNh1/8ngRyoycOs=",
       "Microsoft.JSInterop.WebAssembly.lqrqdcga09.wasm": "sha256-7WtjYQMbGWwUn9g+l5J/EwBeIysEUj1NQmwD/6JVHi8=",
-      "openpanels.1130o0vro1.wasm": "sha256-qyi5gpVLRLyqsZLLS6IDXgjvLVebw6kpaSh+HFdXPZQ=",
+      "openpanels.sfife6zia3.wasm": "sha256-6J4YL5xSCC+PNtNYoITeI/3GreJMHnx5wuZ8/XfXMuU=",
       "System.Collections.Concurrent.hc4x6415gq.wasm": "sha256-QTqa0SiwU6hvgSWXM0av0vDPQmBe+R3XS4gqwsQn7lA=",
       "System.Collections.Immutable.s9o14o4i44.wasm": "sha256-INVHOe7aV6oKUtAnwt2VQZHJHz09mlmp55oF6tMlboU=",
       "System.Collections.1m5rth0mze.wasm": "sha256-1wnsP6dvVjK8zHAbEN0a6kXPTnn7Sv/tmUk9rGLhyTM=",
