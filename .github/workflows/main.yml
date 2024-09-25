@@ -19,7 +19,7 @@ jobs:
 
       - name: Replace base-tag in index.html
         run: |
-           sed -i 's/<base href="\/" \/>/<base href="\/openpanels\/" \/>/g' wwwroot/index.html
+           sed -i 's/<base href="\/" \/>/<base href="\/OpenPanels\/" \/>/g' wwwroot/index.html
 
       # publishes Blazor project to the release-folder
       - name: Publish .NET Core Project
