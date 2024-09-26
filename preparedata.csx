@@ -1,20 +1,22 @@
 using System.Text.Json;
 using System.IO;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
-var json = File.ReadAllText("wwwroot/data/all.json");
-var doc = JsonDocument.Parse(json);
-var urls = new List<string>();
-List<(string src, string download)> _urls = new();
 
-ExtractUrls(doc.RootElement, urls);
+List<string> one = GetUrls("wwwroot/data/all.json");
+List<string> two = GetUrls("wwwroot/data/all.default.json");
 
+one.AddRange(two);
+
+var urls = one.Distinct().ToList();
 urls.RemoveAll(s => s.Contains("/artists/"));
 
-_urls = new();
+List<(string src, string download)> _urls = new();
 
 var mediaJson = File.ReadAllText("wwwroot/data/media.json");
-Parallel.ForEach(urls, new ParallelOptions() { MaxDegreeOfParallelism = 10 }, (url) =>
+int thumbcount = 0;
+foreach (var url in urls)
 {
 	Uri uri = new Uri(url);
 
@@ -27,7 +29,7 @@ Parallel.ForEach(urls, new ParallelOptions() { MaxDegreeOfParallelism = 10 }, (u
 		if (found is not null)
 		{
 			_urls.Add((found, url));
-			Console.WriteLine(penultimateSegment + " " + " FOUND: " + found + " FOR: " + url);
+			thumbcount++;
 
 		}
 		else
@@ -41,7 +43,9 @@ Parallel.ForEach(urls, new ParallelOptions() { MaxDegreeOfParallelism = 10 }, (u
 		_urls.Add((url, url));
 
 	}
-});
+}
+
+Console.WriteLine($"found {thumbcount} thumbnails!");
 
 JsonSerializerOptions options = new JsonSerializerOptions
 {
@@ -52,7 +56,6 @@ JsonSerializerOptions options = new JsonSerializerOptions
 var resultUrls = JsonSerializer.Serialize(_urls, options);
 
 File.WriteAllText("wwwroot/data/merge.json", resultUrls, System.Text.Encoding.UTF8);
-
 
 
 void ExtractUrls(JsonElement element, List<string> urls)
@@ -78,6 +81,15 @@ void ExtractUrls(JsonElement element, List<string> urls)
 			ExtractUrls(item, urls);
 		}
 	}
+}
+
+List<string> GetUrls(string path)
+{
+	var json = File.ReadAllText("wwwroot/data/all.json");
+	var doc = JsonDocument.Parse(json);
+	var resultUrls = new List<string>();
+	ExtractUrls(doc.RootElement, resultUrls);
+	return resultUrls;
 }
 
 string ExtractContentInQuotesAroundTarget(string fullText, string targetString)

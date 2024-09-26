@@ -40,7 +40,7 @@
 				};
 			var urls = JsonSerializer.Deserialize<List<(string, string)>>(json, options);
 
-			_urls = urls;
+			_urls = urls.OrderBy(x => Random.Shared.Next()).ToList();
 			StateHasChanged();
 		}
 
