@@ -21,6 +21,11 @@ jobs:
         run: |
            sed -i 's/<base href="\/" \/>/<base href="\/OpenPanels\/" \/>/g' wwwroot/index.html
 
+      - name: Setup dotnet-script
+        run: |
+           dotnet tool install -g dotnet-script
+           dotnet script preparedata.csx
+
       # publishes Blazor project to the release-folder
       - name: Publish .NET Core Project
         run: dotnet publish openpanels.csproj -c Release -o release --nologo

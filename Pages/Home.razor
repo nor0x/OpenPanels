@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using System.Text.Json;
+@using System.Text.Json.Serialization;
 @inject IJSRuntime _js;
 @inject HttpClient _http
 
@@ -15,8 +16,8 @@
 
 		<Virtualize Items="_urls" Context="url">
 			<ItemContent>
-				<a href="@url" download>
-					<img style="background-image: url('@url'), url('img/3-dots-rotate.svg');" />
+				<a href="@url.download" download>
+					<img style="background-image: url('@url.src'), url('img/3-dots-rotate.svg');" />
 				</a>
 			</ItemContent>
 		</Virtualize>
@@ -24,46 +25,46 @@
 </div>
 @code
 {
-	List<string> _urls;
+	List<(string src, string download)> _urls;
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		if (firstRender)
 		{
-			var json = await _http.GetStringAsync("data/all.json");
-			var doc = JsonDocument.Parse(json);
-			_urls = new List<string>();
-			ExtractUrls(doc.RootElement, _urls);
+			var json = await _http.GetStringAsync("data/merge.json");
+			JsonSerializerOptions options = new JsonSerializerOptions
+				{
+					WriteIndented = true,
+					Converters = { new TupleConverter() },
+					Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+				};
+			var urls = JsonSerializer.Deserialize<List<(string, string)>>(json, options);
 
-			_urls = _urls.OrderBy(x => Random.Shared.Next()).ToList();
-
+			_urls = urls;
 			StateHasChanged();
 		}
 
 	}
 
-	void ExtractUrls(JsonElement element, List<string> urls)
+	public class TupleConverter : JsonConverter<(string src, string url)>
 	{
-		if (element.ValueKind == JsonValueKind.Object)
+		public override (string src, string url) Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions
+		options)
 		{
-			foreach (var property in element.EnumerateObject())
+			using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
 			{
-				if (property.Name == "url")
-				{
-					urls.Add(property.Value.GetString());
-				}
-				else
-				{
-					ExtractUrls(property.Value, urls);
-				}
+				string src = doc.RootElement.GetProperty("src").GetString();
+				string url = doc.RootElement.GetProperty("download").GetString();
+				return (src, url);
 			}
 		}
-		else if (element.ValueKind == JsonValueKind.Array)
+
+		public override void Write(Utf8JsonWriter writer, (string src, string url) value, JsonSerializerOptions options)
 		{
-			foreach (var item in element.EnumerateArray())
-			{
-				ExtractUrls(item, urls);
-			}
+			writer.WriteStartObject();
+			writer.WriteString("src", value.src);
+			writer.WriteString("download", value.url);
+			writer.WriteEndObject();
 		}
 	}
 }
