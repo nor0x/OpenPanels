@@ -1,5 +1,17 @@
+@font-face {
+    font-family: 'Comic Mono';
+    src: url('../fonts/ComicMono.woff2') format('woff2'),
+        url('../fonts/ComicMono.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+
+}
+
+
+
 html {
-    font-family: cursive;
+    font-family: 'Comic Mono';
 }
 
 img {
