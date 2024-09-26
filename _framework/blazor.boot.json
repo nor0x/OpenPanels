@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "openpanels",
   "resources": {
-    "hash": "sha256-NnoMkMAYO02fChs60Hnmy8NqbrFNTFnnPG/RkRN0Sxc=",
+    "hash": "sha256-wk9ozfoYIdLwdc8cgajVGk2qgIEzpswXTB1LpmkUPSI=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Components.0sj7o6etcy.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.q11yc94x13.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
@@ -17,7 +17,7 @@
       "Microsoft.Extensions.Primitives.on5h9y1kqb.wasm": "Microsoft.Extensions.Primitives.wasm",
       "Microsoft.JSInterop.pl2pxw5t8w.wasm": "Microsoft.JSInterop.wasm",
       "Microsoft.JSInterop.WebAssembly.lqrqdcga09.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
-      "openpanels.hl9ap9stfn.wasm": "openpanels.wasm",
+      "openpanels.xtkuuue9n7.wasm": "openpanels.wasm",
       "System.Collections.Concurrent.hc4x6415gq.wasm": "System.Collections.Concurrent.wasm",
       "System.Collections.Immutable.s9o14o4i44.wasm": "System.Collections.Immutable.wasm",
       "System.Collections.1m5rth0mze.wasm": "System.Collections.wasm",
@@ -77,7 +77,7 @@
       "Microsoft.Extensions.Primitives.on5h9y1kqb.wasm": "sha256-HEgB+i+fZZbJ3GID0ze2Jvkb2YpFU1oXEPVsFdKhKE8=",
       "Microsoft.JSInterop.pl2pxw5t8w.wasm": "sha256-k1XrKsWYmJitB6/UawWcuvU5Gi9IGNh1/8ngRyoycOs=",
       "Microsoft.JSInterop.WebAssembly.lqrqdcga09.wasm": "sha256-7WtjYQMbGWwUn9g+l5J/EwBeIysEUj1NQmwD/6JVHi8=",
-      "openpanels.hl9ap9stfn.wasm": "sha256-6zNqp6qDJmnu3qqBT2FDkamWq47FVElGUyngK1YKj8U=",
+      "openpanels.xtkuuue9n7.wasm": "sha256-CwVEFLkYz0/mUFP44SFpxtLr80xG3EtA09KFtAGhOpg=",
       "System.Collections.Concurrent.hc4x6415gq.wasm": "sha256-QTqa0SiwU6hvgSWXM0av0vDPQmBe+R3XS4gqwsQn7lA=",
       "System.Collections.Immutable.s9o14o4i44.wasm": "sha256-INVHOe7aV6oKUtAnwt2VQZHJHz09mlmp55oF6tMlboU=",
       "System.Collections.1m5rth0mze.wasm": "sha256-1wnsP6dvVjK8zHAbEN0a6kXPTnn7Sv/tmUk9rGLhyTM=",
