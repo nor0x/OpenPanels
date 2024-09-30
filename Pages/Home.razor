@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using System.Text.Json;
 @using System.Text.Json.Serialization;
+@using System.Text.RegularExpressions;
 @inject IJSRuntime _js;
 @inject HttpClient _http
 
@@ -12,6 +13,22 @@
 	<br @ />
 	code is here <a href="https://github.com/nor0x/OpenPanels" target="_blank">https://github.com/nor0x/OpenPanels</a>
 </p>
+<div class="filter-container">
+	@if (_filter is not null)
+	{
+		foreach (var filter in _filter)
+		{
+			@if (filter.selected)
+			{
+				<span class="selected-filter" @onclick="()=> SelectFilter(filter)">@filter.src</span>
+			}
+			else
+			{
+				<span class="filter" @onclick="() => SelectFilter(filter)">@filter.src</span>
+			}
+		}
+	}
+</div>
 <div class="img-container">
 	@if (_urls is not null)
 	{
@@ -27,12 +44,16 @@
 </div>
 @code
 {
+
+	List<(string src, string download)> _allUrls;
 	List<(string src, string download)> _urls;
+	List<(string src, bool selected)> _filter;
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		if (firstRender)
 		{
+			_filter = new() { ("**all**", true) };
 			var json = await _http.GetStringAsync("data/merge.json");
 			JsonSerializerOptions options = new JsonSerializerOptions
 				{
@@ -43,9 +64,61 @@
 			var urls = JsonSerializer.Deserialize<List<(string, string)>>(json, options);
 
 			_urls = urls.OrderBy(x => Random.Shared.Next()).ToList();
+			_allUrls = _urls;
+
+			foreach (var url in _urls)
+			{
+				string pattern = @"~([^~_]+)_";
+
+				// Use Regex.Match to find the first match
+				Match match = Regex.Match(url.src, pattern);
+
+				if (match.Success)
+				{
+					var matchedText = match.Groups[1].Value;
+					if (!_filter.Any(f => f.src == matchedText))
+					{
+						_filter.Add((matchedText, false));
+					}
+					Console.WriteLine($"Found text: {matchedText}");
+				}
+				else
+				{
+					Console.WriteLine("No match found.");
+				}
+			}
+
+
 			StateHasChanged();
 		}
 
+
+	}
+
+	void SelectFilter((string src, bool selected) filter)
+	{
+		for (int i = 0; i < _filter.Count; i++)
+		{
+			if (_filter[i].src == filter.src)
+			{
+				_filter[i] = (_filter[i].src, true);
+
+			}
+			else
+			{
+				_filter[i] = (_filter[i].src, false);
+			}
+		}
+
+		if (filter.src == "**all**")
+		{
+			_urls = _allUrls;
+		}
+		else
+		{
+			_urls = _allUrls.Where(u => u.src.Contains(filter.src)).ToList();
+		}
+		StateHasChanged();
 	}
 
 	public class TupleConverter : JsonConverter<(string src, string url)>
